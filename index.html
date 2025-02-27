@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API Signature Generator</title>
+  <link rel="stylesheet" href="style.css"> </head>
+</head>
+<body>
+  <div class="container">
+    <h1>API Signature Generator</h1>
+    <form id="signatureForm">
+      <label for="apiKey">API Key:</label>
+      <input type="text" id="apiKey" name="apiKey" required><br>
+      <label for="apiSecret">API Secret:</label>
+      <input type="password" id="apiSecret" name="apiSecret" required><br>
+      <label for="title">Title:</label>
+      <input type="text" id="title" name="title" required><br>
+      <label for="algorithm">Algorithm:</label>
+      <select id="algorithm" name="algorithm">
+        <option value="sha1">SHA-1</option>
+        <option value="sha256">SHA-256</option>
+        <option value="sha512" selected>SHA-512</option>
+      </select><br>
+      <button type="button" onclick="generateSignature()">Generate Signature</button>
+    </form>
+
+    <div id="generatedSignature" class="hidden">
+      <h2 class="hidden">Generated Signature</h2>
+    </div>
+    <button class="copy-button hidden" onclick="copySignature()">Copy Result</button> <!-- Copy button initially hidden -->
+  </div>
+
+  <!-- Copyright -->
+  <div class="copyright">
+    Developed by HocTran
+  </div>
+<!-- Include CryptoJS library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+<script src="script.js"></script> </body>
+</body>
+</html>
