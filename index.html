@@ -104,35 +104,39 @@
     <img src="https://img.icons8.com/fluency/96/lock-2.png" alt="Logo" class="logo" />
     <h1>API Signature Generator</h1>
     <div style="text-align:right;margin-bottom:12px;">
-      <button onclick="window.location.href='algorithms-intro.html'" style="background:#007bff;color:#fff;border:none;padding:8px 18px;border-radius:6px;font-size:1em;cursor:pointer;box-shadow:0 2px 8px #007bff22;transition:background 0.2s;">About Hash Algorithms</button>
+      <button onclick="window.location.href='algorithms.html'" style="background:#007bff;color:#fff;border:none;padding:8px 18px;border-radius:6px;font-size:1em;cursor:pointer;box-shadow:0 2px 8px #007bff22;transition:background 0.2s;">About Hash Algorithms</button>
     </div>
     <div class="progress-bar" id="progressBar"><div class="progress" id="progress"></div></div>
     <form id="signatureForm">
-      <div class="tooltip">
-        <label for="apiKey">API Key:</label>
-        <span class="tooltiptext">Enter your public API key</span>
+      <div class="vertical-form">
+        <div class="form-group tooltip">
+          <label for="apiKey" class="bright-label"><span style="color:#007bff;font-size:1.2em;vertical-align:middle;">🔑</span> API Key</label>
+          <span class="tooltiptext">Enter your public API key</span>
+          <input type="text" id="apiKey" name="apiKey" required placeholder="Your API Key" class="bright-input">
+        </div>
+        <div class="form-group tooltip">
+          <label for="apiSecret" class="bright-label"><span style="color:#ff3860;font-size:1.2em;vertical-align:middle;">🔒</span> API Secret</label>
+          <span class="tooltiptext">Enter your secret key (kept private)</span>
+          <input type="password" id="apiSecret" name="apiSecret" required placeholder="Your API Secret" class="bright-input">
+        </div>
+        <div class="form-group tooltip">
+          <label for="title" class="bright-label"><span style="color:#ffc107;font-size:1.2em;vertical-align:middle;">🏷️</span> Title</label>
+          <span class="tooltiptext">A custom header prefix (e.g. MyApp)</span>
+          <input type="text" id="title" name="title" required placeholder="Header Title" class="bright-input">
+        </div>
+        <div class="form-group tooltip">
+          <label for="algorithm" class="bright-label"><span style="color:#28a745;font-size:1.2em;vertical-align:middle;">⚙️</span> Algorithm</label>
+          <span class="tooltiptext">Choose your hashing algorithm</span>
+          <select id="algorithm" name="algorithm" class="bright-input">
+            <option value="sha1">SHA-1</option>
+            <option value="sha256">SHA-256</option>
+            <option value="sha512" selected>SHA-512</option>
+          </select>
+        </div>
+        <div style="text-align:center;margin-top:18px;">
+          <button type="button" onclick="generateSignature()" class="pulse" style="background:linear-gradient(90deg,#007bff 0%,#28a745 100%);color:#fff;font-weight:bold;letter-spacing:1px;box-shadow:0 2px 8px #007bff33;">✨ Generate Signature</button>
+        </div>
       </div>
-      <input type="text" id="apiKey" name="apiKey" required placeholder="Your API Key"><br>
-      <div class="tooltip">
-        <label for="apiSecret">API Secret:</label>
-        <span class="tooltiptext">Enter your secret key (kept private)</span>
-      </div>
-      <input type="password" id="apiSecret" name="apiSecret" required placeholder="Your API Secret"><br>
-      <div class="tooltip">
-        <label for="title">Title:</label>
-        <span class="tooltiptext">A custom header prefix (e.g. MyApp)</span>
-      </div>
-      <input type="text" id="title" name="title" required placeholder="Header Title"><br>
-      <div class="tooltip">
-        <label for="algorithm">Algorithm:</label>
-        <span class="tooltiptext">Choose your hashing algorithm</span>
-      </div>
-      <select id="algorithm" name="algorithm">
-        <option value="sha1">SHA-1</option>
-        <option value="sha256">SHA-256</option>
-        <option value="sha512" selected>SHA-512</option>
-      </select><br>
-        <button type="button" onclick="generateSignature()" class="pulse">Generate Signature</button>
     </form>
 
     <div id="generatedSignature" class="hidden fade-in signature-box">
