@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hash Algorithm Introduction</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .lang-switch {
+      margin: 20px 0;
+      text-align: center;
+    }
+    .intro-section {
+      max-width: 700px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      padding: 32px 24px;
+      animation: fadeIn 1s;
+    }
+    .algo-title {
+      color: #007bff;
+      font-size: 1.3em;
+      margin-top: 24px;
+      margin-bottom: 8px;
+    }
+    .algo-desc {
+      font-size: 1em;
+      color: #333;
+      margin-bottom: 16px;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container fade-in">
+    <h1 style="text-align:center;">Hash Algorithm Introduction</h1>
+    <div style="text-align:right;margin-bottom:12px;">
+      <button onclick="window.location.href='index.html'" style="background:#007bff;color:#fff;border:none;padding:8px 18px;border-radius:6px;font-size:1em;cursor:pointer;box-shadow:0 2px 8px #007bff22;transition:background 0.2s;">Back to Generator</button>
+    </div>
+    <div class="lang-switch">
+      <label for="langSelect" style="font-weight:bold;margin-right:8px;">Language:</label>
+      <select id="langSelect" onchange="setLang(this.value)" style="padding:6px 12px;font-size:1em;">
+        <option value="en">English</option>
+        <option value="ja">日本語</option>
+      </select>
+    </div>
+    <div id="introContent" class="intro-section"></div>
+  </div>
+  <script>
+    const intros = {
+      en: `
+        <div style='margin-bottom:24px;'>
+          <span style='font-size:1.1em;'>🔐 <b>Understanding SHA-1, SHA-256, and SHA-512: Secure Hash Algorithms Explained</b></span>
+          <p>Hash functions are essential tools in cryptography, used to ensure data integrity, authenticate digital signatures, and secure sensitive information. Among the most commonly discussed hash functions are:</p>
+        </div>
+        <div class='algo-title'>🧮 What is a Hash Function?</div>
+        <div class='algo-desc'>A hash function takes an input (or 'message') and returns a fixed-length string of bytes. The output (called the hash value or digest) is unique to the input. Even a slight change in input drastically changes the output, a property known as the avalanche effect.</div>
+        <div class='algo-title'>🔎 SHA-1 (Secure Hash Algorithm 1)</div>
+        <div class='algo-desc'>
+          <b>Output Size:</b> 160 bits (20 bytes)<br>
+          <b>Developed by:</b> NSA (1995)<br>
+          <b>Hash Example:</b> <code>SHA1("Hello") = f7ff9e8b7bb2b91af11f496e4dca7ae4f7c8abfb</code><br>
+          <b>Pros:</b> Faster than newer SHA versions, Historically popular (used in SSL, Git, etc.)<br>
+          <b>Cons:</b> Broken: Vulnerable to collision attacks, Not recommended for secure applications since 2005, Officially deprecated by major organizations (e.g., NIST, Google)
+        </div>
+        <div class='algo-title'>🔐 SHA-256 (Secure Hash Algorithm 256-bit)</div>
+        <div class='algo-desc'>
+          <b>Output Size:</b> 256 bits (32 bytes)<br>
+          <b>Developed in:</b> 2001 (part of the SHA-2 family)<br>
+          <b>Hash Example:</b> <code>SHA256("Hello") = 185f8db32271fe25f561a6fc938b2e264306ec304eda518007d1764826381969</code><br>
+          <b>Pros:</b> Much more secure than SHA-1, Used in blockchain (e.g., Bitcoin), TLS certificates, and digital signatures, Widely supported in modern systems<br>
+          <b>Cons:</b> Slower than SHA-1, Not ideal for systems with extremely limited resources (embedded systems)
+        </div>
+        <div class='algo-title'>🔐 SHA-512 (Secure Hash Algorithm 512-bit)</div>
+        <div class='algo-desc'>
+          <b>Output Size:</b> 512 bits (64 bytes)<br>
+          <b>Developed in:</b> 2001 (also part of SHA-2 family)<br>
+          <b>Hash Example:</b> <code>SHA512("Hello") = 3615f80c9d293ed7402687f89c4f94b53d00f0e6d27d4b77b2f8e6a83f1a8e5b60f39c06c3c39291f7e62f5085c6db8780c8a31b2d8aaf574e2b97f6d0f559e0</code><br>
+          <b>Pros:</b> Stronger security due to larger digest size, Slightly faster on 64-bit systems due to internal optimizations, Better resistance to future collision or pre-image attacks<br>
+          <b>Cons:</b> Larger output (64 bytes) may be overkill for some applications, Higher memory usage, Slower on 32-bit systems
+        </div>
+        <div class='algo-title'>⚖️ Comparison Table</div>
+        <div class='algo-desc'>
+          <table style='width:100%;border-collapse:collapse;margin-bottom:16px;'>
+            <thead>
+              <tr style='background:#f5f5f5;'>
+                <th style='padding:6px;border:1px solid #ddd;'>Feature</th>
+                <th style='padding:6px;border:1px solid #ddd;'>SHA-1</th>
+                <th style='padding:6px;border:1px solid #ddd;'>SHA-256</th>
+                <th style='padding:6px;border:1px solid #ddd;'>SHA-512</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td style='padding:6px;border:1px solid #ddd;'>Digest Size</td><td style='padding:6px;border:1px solid #ddd;'>160 bits</td><td style='padding:6px;border:1px solid #ddd;'>256 bits</td><td style='padding:6px;border:1px solid #ddd;'>512 bits</td></tr>
+              <tr><td style='padding:6px;border:1px solid #ddd;'>Security</td><td style='padding:6px;border:1px solid #ddd;'>🔴 Weak</td><td style='padding:6px;border:1px solid #ddd;'>🟢 Strong</td><td style='padding:6px;border:1px solid #ddd;'>🟢 Very Strong</td></tr>
+              <tr><td style='padding:6px;border:1px solid #ddd;'>Speed</td><td style='padding:6px;border:1px solid #ddd;'>🟢 Fast</td><td style='padding:6px;border:1px solid #ddd;'>🟡 Moderate</td><td style='padding:6px;border:1px solid #ddd;'>🟡 Moderate (faster on 64-bit)</td></tr>
+              <tr><td style='padding:6px;border:1px solid #ddd;'>Use Today?</td><td style='padding:6px;border:1px solid #ddd;'>❌ No</td><td style='padding:6px;border:1px solid #ddd;'>✅ Yes</td><td style='padding:6px;border:1px solid #ddd;'>✅ Yes</td></tr>
+              <tr><td style='padding:6px;border:1px solid #ddd;'>Collision Resistance</td><td style='padding:6px;border:1px solid #ddd;'>❌ Broken</td><td style='padding:6px;border:1px solid #ddd;'>✅ Secure</td><td style='padding:6px;border:1px solid #ddd;'>✅ Secure</td></tr>
+              <tr><td style='padding:6px;border:1px solid #ddd;'>Typical Use</td><td style='padding:6px;border:1px solid #ddd;'>Deprecated</td><td style='padding:6px;border:1px solid #ddd;'>Blockchain, TLS</td><td style='padding:6px;border:1px solid #ddd;'>Digital signatures, high-security systems</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class='algo-title'>🚀 Summary</div>
+        <div class='algo-desc'>
+          SHA-1 should not be used for secure applications anymore. It's vulnerable and deprecated.<br>
+          SHA-256 is a good balance of performance and security and is widely used across industries.<br>
+          SHA-512 offers the highest security among the three, especially effective on 64-bit systems.<br>
+          <b>When choosing a hash function, always prioritize security and match the algorithm to your system's capabilities and performance requirements.</b>
+        </div>
+      `,
+      ja: `
+        <div style='margin-bottom:24px;'>
+          <span style='font-size:1.1em;'>🔐 <b>SHA-1、SHA-256、SHA-512の理解：セキュア・ハッシュ・アルゴリズムの解説</b></span>
+          <p>ハッシュ関数は暗号技術において不可欠なツールであり、データの整合性の確保、電子署名の認証、機密情報の保護などに利用されます。最もよく議論されるハッシュ関数には以下があります：</p>
+        </div>
+        <div class='algo-title'>🧮 ハッシュ関数とは？</div>
+        <div class='algo-desc'>ハッシュ関数は入力（メッセージ）を受け取り、固定長のバイト列（ハッシュ値またはダイジェスト）を返します。出力は入力に固有であり、入力が少しでも変わると出力が大きく変化します（アバランチ効果）。</div>
+        <div class='algo-title'>🔎 SHA-1（セキュア・ハッシュ・アルゴリズム1）</div>
+        <div class='algo-desc'>
+          <b>出力サイズ:</b> 160ビット（20バイト）<br>
+          <b>開発者:</b> NSA（1995年）<br>
+          <b>ハッシュ例:</b> <code>SHA1("Hello") = f7ff9e8b7bb2b91af11f496e4dca7ae4f7c8abfb</code><br>
+          <b>メリット:</b> 新しいSHAバージョンより高速、SSLやGitなどで広く利用<br>
+          <b>デメリット:</b> 衝突攻撃に脆弱、安全な用途には推奨されない（2005年以降）、主要機関で非推奨（NIST、Googleなど）
+        </div>
+        <div class='algo-title'>🔐 SHA-256（セキュア・ハッシュ・アルゴリズム256ビット）</div>
+        <div class='algo-desc'>
+          <b>出力サイズ:</b> 256ビット（32バイト）<br>
+          <b>開発年:</b> 2001年（SHA-2ファミリー）<br>
+          <b>ハッシュ例:</b> <code>SHA256("Hello") = 185f8db32271fe25f561a6fc938b2e264306ec304eda518007d1764826381969</code><br>
+          <b>メリット:</b> SHA-1より高い安全性、ブロックチェーン（例：ビットコイン）、TLS証明書、電子署名などで利用、現代システムで広くサポート<br>
+          <b>デメリット:</b> SHA-1より遅い、リソースが非常に限られたシステム（組み込み機器）には不向き
+        </div>
+        <div class='algo-title'>🔐 SHA-512（セキュア・ハッシュ・アルゴリズム512ビット）</div>
+        <div class='algo-desc'>
+          <b>出力サイズ:</b> 512ビット（64バイト）<br>
+          <b>開発年:</b> 2001年（SHA-2ファミリー）<br>
+          <b>ハッシュ例:</b> <code>SHA512("Hello") = 3615f80c9d293ed7402687f89c4f94b53d00f0e6d27d4b77b2f8e6a83f1a8e5b60f39c06c3c39291f7e62f5085c6db8780c8a31b2d8aaf574e2b97f6d0f559e0</code><br>
+          <b>メリット:</b> より大きなダイジェストサイズによる強力なセキュリティ、64ビットシステムでやや高速、将来の衝突・逆算攻撃への耐性<br>
+          <b>デメリット:</b> 出力が大きすぎる場合がある（64バイト）、メモリ使用量が多い、32ビットシステムでは遅い
+        </div>
+        <div class='algo-title'>⚖️ 比較表</div>
+        <div class='algo-desc'>
+          <table style='width:100%;border-collapse:collapse;margin-bottom:16px;'>
+            <thead>
+              <tr style='background:#f5f5f5;'>
+                <th style='padding:6px;border:1px solid #ddd;'>特徴</th>
+                <th style='padding:6px;border:1px solid #ddd;'>SHA-1</th>
+                <th style='padding:6px;border:1px solid #ddd;'>SHA-256</th>
+                <th style='padding:6px;border:1px solid #ddd;'>SHA-512</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td style='padding:6px;border:1px solid #ddd;'>ダイジェストサイズ</td><td style='padding:6px;border:1px solid #ddd;'>160ビット</td><td style='padding:6px;border:1px solid #ddd;'>256ビット</td><td style='padding:6px;border:1px solid #ddd;'>512ビット</td></tr>
+              <tr><td style='padding:6px;border:1px solid #ddd;'>安全性</td><td style='padding:6px;border:1px solid #ddd;'>🔴 弱い</td><td style='padding:6px;border:1px solid #ddd;'>🟢 強い</td><td style='padding:6px;border:1px solid #ddd;'>🟢 非常に強い</td></tr>
+              <tr><td style='padding:6px;border:1px solid #ddd;'>速度</td><td style='padding:6px;border:1px solid #ddd;'>🟢 高速</td><td style='padding:6px;border:1px solid #ddd;'>🟡 普通</td><td style='padding:6px;border:1px solid #ddd;'>🟡 普通（64ビットで高速）</td></tr>
+              <tr><td style='padding:6px;border:1px solid #ddd;'>現代での利用</td><td style='padding:6px;border:1px solid #ddd;'>❌ 不可</td><td style='padding:6px;border:1px solid #ddd;'>✅ 可</td><td style='padding:6px;border:1px solid #ddd;'>✅ 可</td></tr>
+              <tr><td style='padding:6px;border:1px solid #ddd;'>衝突耐性</td><td style='padding:6px;border:1px solid #ddd;'>❌ 脆弱</td><td style='padding:6px;border:1px solid #ddd;'>✅ 安全</td><td style='padding:6px;border:1px solid #ddd;'>✅ 安全</td></tr>
+              <tr><td style='padding:6px;border:1px solid #ddd;'>主な用途</td><td style='padding:6px;border:1px solid #ddd;'>非推奨</td><td style='padding:6px;border:1px solid #ddd;'>ブロックチェーン、TLS</td><td style='padding:6px;border:1px solid #ddd;'>電子署名、高セキュリティシステム</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class='algo-title'>🚀 まとめ</div>
+        <div class='algo-desc'>
+          SHA-1は安全な用途にはもはや利用すべきではありません。脆弱であり、非推奨です。<br>
+          SHA-256はパフォーマンスと安全性のバランスが良く、幅広い分野で利用されています。<br>
+          SHA-512は3つの中で最も高い安全性を持ち、特に64ビットシステムで効果的です。<br>
+          <b>ハッシュ関数を選択する際は、常に安全性を優先し、システムの能力やパフォーマンス要件に合わせてアルゴリズムを選びましょう。</b>
+        </div>
+      `
+    };
+    function setLang(lang) {
+      document.getElementById('introContent').innerHTML = intros[lang];
+    }
+    setLang('en');
+  </script>
+</body>
+</html>
